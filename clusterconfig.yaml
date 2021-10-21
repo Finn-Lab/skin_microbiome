@@ -8,24 +8,6 @@ __default__:
 
 
 
-sra_download:
-    mem : 2000
-    nCPU: 10
-    time : "01:00:00"
-    output : "logs/{rule}.%J.o"
-    error : "logs/{rule}.%J.e"
-
-
-
-kneaddata_bowtie:
-    nCPU: 4
-    mem: 40000
-    name      : "{rule}"
-    output    : "logs/{rule}.%J.o"
-    error     : "logs/{rule}.%J.e"
-    time      : "04:30:00"
-
-
 
 sort:
     mem : 6000
@@ -115,44 +97,6 @@ mashdist:
     output : "logs/{rule}.%J.o"
     error : "logs/{rule}.%J.e"
 
-dnadiff:
-    mem : 5000
-    nCPU: 2
-    time : "02:30:00"
-    output : "logs/{rule}.%J.o"
-    error : "logs/{rule}.%J.e"
-
-
-
-prokka:
-    mem : 2000
-    nCPU : 2
-    time : "02:00:00"
-    output : "logs/{rule}.%J.o"
-    error : "logs/{rule}.%J.e"
-
-prokka_coas:
-    mem : 100000
-    nCPU : 2
-    time : "00:40:00"
-    output : "logs/{rule}.%J.o"
-    error : "logs/{rule}.%J.e"
-
-cmseq:
-    mem : 4000
-    nCPU : 2
-    time : "02:00:00"
-    output : "logs/{rule}.%J.o"
-    error : "logs/{rule}.%J.e"
-
-cmseq_coas:
-    mem : 10000
-    nCPU : 2
-    time : "10:00:00"
-    output : "logs/{rule}.%J.o"
-    error : "logs/{rule}.%J.e"
-
-
 
 dRep_95:
     mem : 10000
@@ -177,38 +121,3 @@ GTDB_TK:
 
 
 
-mapreads_scaffold:
-    nCPU: 10
-    mem: 5000
-    name      : "{rule}"
-    output    : "logs/{rule}.%J.o"
-    error     : "logs/{rule}.%J.e"
-    time      : "03:00:00"
-
-cat_MAGs:
-    mem : 6000
-    nCPU : 10
-    time : "03:00:00"
-    output : "logs/{rule}.%J.o"
-    error : "logs/{rule}.%J.e"
-
-cat_MAGs_coas:
-    mem : 6000
-    nCPU : 10
-    time : "03:00:00"
-    output : "logs/{rule}.%J.o"
-    error : "logs/{rule}.%J.e"
-
-readmap:
-    mem : 5000
-    nCPU: 10
-    time : "02:30:00"
-    output : "logs/{rule}.%J.o"
-    error : "logs/{rule}.%J.e"
-
-readmap_coassembly:
-    mem : 5000
-    nCPU: 10
-    time : "04:50:00"
-    output : "logs/{rule}.%J.o"
-    error : "logs/{rule}.%J.e"
