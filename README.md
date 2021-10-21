@@ -4,17 +4,13 @@
 ## Contents
 
 - [Overview](#overview)
-- [System Requirements](#system-requirements)
-- [Workflow setup](#Workflow-setup)
 - [Running pipeline](#running-pipeline)
-- [CPU time](#CPU-time)
 - [License](./LICENSE)
-- [Issues](https://github.com/Finn-Lab/MAG_Snakemake_wf/issues)
 - [Citation](#citation)
 
 # Overview
 
-This pipeline has the scripts and modules used to generate skin MAGs using different per sample and co-assembly approaches. To use the pipeline a file called coassembly_runs.txt and runs.txt must be produced which detail the co-assembly approaches and the per sample approaches used in our pipeline. If the fukes are bit available locally, they will be downloaded from the SRA to the directory data/raw
+This pipeline has the scripts and modules used to generate skin MAGs using different per sample and co-assembly approaches. To use the pipeline a file called coassembly_runs.txt and runs.txt must be produced which detail the co-assembly approaches and the per sample approaches used in our pipeline. The files must be put in the directory data/raw
 
 
 
@@ -22,7 +18,7 @@ This pipeline has the scripts and modules used to generate skin MAGs using diffe
 
 ### Submitting jobs
 
-To run pipeline on the small gut dataset specified in runs.txt and coassembly_runs.txt, submit jobs with SLURM scheduler:
+To run pipeline on the runs specified in runs.txt and coassembly_runs.txt, submit jobs with SLURM scheduler:
 ```
 snakemake --use-singularity --restart-times 3 -k -j 50 --cluster-config clusterconfig.yaml --cluster "sbatch -n {cluster.nCPU} --mem {cluster.mem} -e {cluster.error} -o {cluster.output} -t {cluster.time}"
 ```

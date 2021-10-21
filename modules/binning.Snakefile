@@ -52,13 +52,11 @@ def metawrap_cmmd(wildcards):
 
 checkpoint metawrap_binning:
     input:
-        fwd=join(DATA_DIR, preprocessing_dir, "processed/singlerun/{sample}_1.fastq"),
-        rev=join(DATA_DIR, preprocessing_dir, "processed/singlerun/{sample}_2.fastq"),
+        fwd=join(DATA_DIR, "singlerun/{sample}_1.fastq"),
+        rev=join(DATA_DIR, "singlerun/{sample}_2.fastq"),
         fasta=join(DATA_DIR, assembly_dir, "singlerun/{sample}/scaffolds.fasta"),
     output:
         outfile=join(DATA_DIR, binning_dir, "singlerun/{sample}/metawrap/done.txt"),
-    singularity:
-        "shub://sskashaf/Containers:metawrap"
     params:
         outdir=join(DATA_DIR, binning_dir, "singlerun/{sample}/metawrap"),
         mincontiglength=2500,
@@ -88,8 +86,6 @@ checkpoint metawrap_binning_coas:
         outdir=join(DATA_DIR, binning_dir, "coassembly/{sample}/metawrap/"),
         reads=lambda wildcards: metawrap_cmmd(wildcards),
         mincontiglength=2500,
-    singularity:
-        "shub://sskashaf/Containers:metawrap"
     threads: workflow.cores
     resources:
         time=lambda wildcards, attempt: 20 * attempt,
@@ -102,18 +98,3 @@ checkpoint metawrap_binning_coas:
         -l {params.mincontiglength} -o {params.outdir} {params.reads}
         touch {output}
         """
-# This file is part of MAG Snakemake workflow.
-#
-# MAG Snakemake workflow is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# MAG Snakemake workflow is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with MAG Snakemake workflow.  If not, see <https://www.gnu.org/licenses/>.
-

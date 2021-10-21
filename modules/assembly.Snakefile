@@ -18,8 +18,8 @@
 
 checkpoint spades:
     input:
-        fwd=join(DATA_DIR, preprocessing_dir, "processed/singlerun/{run}_1.fastq"),
-        rev=join(DATA_DIR, preprocessing_dir, "processed/singlerun/{run}_2.fastq"),
+        fwd=join(DATA_DIR, "singlerun/{run}_1.fastq"),
+        rev=join(DATA_DIR, "singlerun/{run}_2.fastq"),
     output:
         join(DATA_DIR, assembly_dir, "singlerun/{run}/scaffolds.fasta"),
         join(DATA_DIR, assembly_dir, "singlerun/{run}/contigs.fasta"),
@@ -29,8 +29,6 @@ checkpoint spades:
     resources:
         time=lambda wildcards, attempt: 10 * attempt,
         mem=lambda wildcards, attempt: 100 * attempt,
-    singularity:
-        "shub://sskashaf/MAG_wf_containers_2021:assembly"
     shell:
         """
         rm -rf {params.outdir}
@@ -42,8 +40,8 @@ checkpoint spades:
 
 checkpoint spades_coas:
     input:
-        fwd=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_1.fastq.gz"),
-        rev=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_2.fastq.gz"),
+        fwd=join(DATA_DIR, "coassembly/{run}_1.fastq.gz"),
+        rev=join(DATA_DIR, "coassembly/{run}_2.fastq.gz"),
     output:
         join(DATA_DIR, assembly_dir, "coassembly/{run}/scaffolds.fasta"),
         join(DATA_DIR, assembly_dir, "coassembly/{run}/contigs.fasta"),
@@ -53,8 +51,6 @@ checkpoint spades_coas:
     threads: workflow.cores
     params:
         outdir=join(DATA_DIR, assembly_dir, "coassembly/{run}/"),
-    singularity:
-        "shub://sskashaf/MAG_wf_containers_2021:assembly"
     shell:
         """
         rm -rf {params.outdir}

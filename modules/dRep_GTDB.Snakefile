@@ -23,8 +23,6 @@ checkpoint dRep:
         drep=directory(join(DATA_DIR, binning_analyses, "singlerun/dRep/dereplicated_genomes")),
         out=join(DATA_DIR, binning_analyses, "singlerun/dRep/data_tables/Sdb.csv"),
     threads: workflow.cores
-    singularity:
-        "shub://sskashaf/MAG_wf_containers_2021:drep"
     params:
         indir=join(DATA_DIR, binning_analyses, "singlerun/all_metawrap_bins/"),
         outdir=join(DATA_DIR, binning_analyses, "singlerun/dRep/"),
@@ -60,8 +58,6 @@ checkpoint dRep_coas:
         drep=directory(join(DATA_DIR, binning_analyses, "singlerun_coassembly/dRep/dereplicated_genomes")),
         out=join(DATA_DIR, binning_analyses, "singlerun_coassembly/dRep/data_tables/Sdb.csv"),
     threads: workflow.cores
-    singularity:
-        "shub://sskashaf/MAG_wf_containers_2021:drep"
     params:
         indir=join(DATA_DIR, binning_analyses, "singlerun_coassembly/bins_dRep_singlerun_coas/"),
         singlerun_dRep=join(DATA_DIR, binning_analyses, "singlerun/dRep/dereplicated_genomes"),
@@ -89,8 +85,6 @@ rule GTDB_TK:
         indir=directory(join(DATA_DIR, binning_analyses, "singlerun_coassembly/dRep/dereplicated_genomes/")),
         outdir=join(DATA_DIR, binning_analyses, "singlerun_coassembly/GTDB/"),
         ext="fa"
-    singularity:
-        "docker://quay.io/biocontainers/gtdbtk:1.3.0--py_1"
     shell:
         """
         real=$(realpath {input.gtdbrelease})
@@ -105,8 +99,6 @@ rule plot_GTDB:
         join(DATA_DIR, binning_analyses, "singlerun_coassembly/GTDB/gtdbtk.bac120.summary.tsv"),
     output:
         join(DATA_DIR, "figures/gtdb_bacteria.png"),
-    singularity:
-        "shub://sskashaf/MAG_wf_containers_2021:r"
     shell:
         """
         Rscript scripts/plotting/plot_gtdb.R {input}

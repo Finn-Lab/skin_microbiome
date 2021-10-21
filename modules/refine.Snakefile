@@ -21,8 +21,6 @@ rule bin_refinement:
         join(DATA_DIR, binning_dir, "singlerun/{sample}/metawrap/done.txt"),
     output:
         join(DATA_DIR, binning_dir, "singlerun/{sample}/metawrap_bin_refinement/metawrap_50_10_bins/done.txt"),
-    singularity:
-        "shub://sskashaf/Containers:metawrap"
     params:
         metabat=join(DATA_DIR, binning_dir, "singlerun/{sample}/metawrap/metabat2_bins"),
         maxbin=join(DATA_DIR, binning_dir, "singlerun/{sample}/metawrap/maxbin2_bins"),
@@ -96,8 +94,6 @@ rule checkm:
         expand(join(DATA_DIR, binning_dir, "singlerun/{sample}/metawrap_bin_refinement/copied.txt"), sample=RUN), 
     output:
         join(DATA_DIR, binning_analyses, "singlerun/checkm/checkm_metrics.tsv"),
-    singularity:
-        "shub://sskashaf/Containers:metawrap"
     params:
         ext="fa",
         indir=join(DATA_DIR, binning_analyses, "singlerun/all_metawrap_bins"),
@@ -136,8 +132,6 @@ rule plot_checkm:
     output:
         barplot=join(DATA_DIR, "figures/checkm_completeness.png"),
         barplot2=join(DATA_DIR, "figures/checkm_contam.png"),
-    singularity:
-        "shub://sskashaf/MAG_wf_containers_2021:r"
     shell:
         """
         Rscript scripts/plotting/plot_checkm_mags.R {input.sr} {input.coas}
