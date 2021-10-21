@@ -30,8 +30,8 @@ rule coas:
     input:
         unpack(lambda wildcards: get_sample_reads(wildcards.sample)),
     output:
-        r1=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{sample}_1.fastq"),
-        r2=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{sample}_2.fastq"),
+        r1=join(DATA_DIR, "coassembly/{sample}_1.fastq"),
+        r2=join(DATA_DIR, "coassembly/{sample}_2.fastq"),
     shell:
         """
         cat {input.r1} > {output.r1}
@@ -41,11 +41,11 @@ rule coas:
 
 rule sort:
     input:
-        fwd=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_1.fastq"),
-        rev=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_2.fastq"),
+        fwd=join(DATA_DIR, "coassembly/{run}_1.fastq"),
+        rev=join(DATA_DIR, "coassembly/{run}_2.fastq"),
     output:
-        fwd=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_sorted_1.fastq"),
-        rev=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_sorted_2.fastq"),
+        fwd=join(DATA_DIR, "coassembly/{run}_sorted_1.fastq"),
+        rev=join(DATA_DIR, "coassembly/{run}_sorted_2.fastq"),
     singularity:
         "shub://sskashaf/MAG_wf_containers_2021:assembly"
     shell:
@@ -58,14 +58,14 @@ rule sort:
 
 rule zip_file:
     input:
-        fwd=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_sorted_1.fastq"),
-        rev=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_sorted_2.fastq"),
+        fwd=join(DATA_DIR, "coassembly/{run}_sorted_1.fastq"),
+        rev=join(DATA_DIR, "coassembly/{run}_sorted_2.fastq"),
     output:
-        fwd=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_1.fastq.gz"),
-        rev=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_2.fastq.gz"),
+        fwd=join(DATA_DIR, "coassembly/{run}_1.fastq.gz"),
+        rev=join(DATA_DIR, "coassembly/{run}_2.fastq.gz"),
     params:
-        fwd=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_sorted_1.fastq.gz"),
-        rev=join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_sorted_2.fastq.gz"),
+        fwd=join(DATA_DIR, "coassembly/{run}_sorted_1.fastq.gz"),
+        rev=join(DATA_DIR, "coassembly/{run}_sorted_2.fastq.gz"),
     shell:
         """
         rm -f {params.fwd}
@@ -83,9 +83,9 @@ rule zip_file:
 
 rule readcounts_coas:
     input:
-        raw=expand(join(DATA_DIR, preprocessing_dir, "processed/coassembly/{run}_{read}.fastq"), run=COAS, read=["1", "2"]),
+        raw=expand(join(DATA_DIR, "coassembly/{run}_{read}.fastq"), run=COAS, read=["1", "2"]),
     output:
-        join(DATA_DIR, preprocessing_dir, "readcounts_coas.tsv"),
+        join(DATA_DIR, "readcounts_coas.tsv"),
     run:
         outfile = str(output)
         if os.path.exists(outfile):
