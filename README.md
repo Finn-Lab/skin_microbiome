@@ -10,7 +10,7 @@
 
 # Overview
 
-This pipeline has the scripts and modules used to generate skin MAGs using different per sample and co-assembly approaches. To use the pipeline a file called coassembly_runs.txt and runs.txt must be produced which detail the co-assembly approaches and the per sample approaches used in our pipeline. The files must be put in the directory data/raw
+This pipeline has the scripts and modules used to generate skin MAGs using different per sample and co-assembly approaches. To use the pipeline a file called coassembly_runs.txt and runs.txt must be produced which detail the co-assembly approaches and the per sample approaches used in our pipeline. The metagenomes must be put in the directory data/singlerun and data/coassembly for the single run and co-assembly approaches respectively
 
 
 
