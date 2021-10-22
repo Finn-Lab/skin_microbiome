@@ -20,13 +20,22 @@ This pipeline has the scripts and modules used to generate, quality assess, and 
 HPC with at least 500 gigabytes of memory
 
 ## Software Requirements
+- parallel-fastq-dump v0.6.6
+- KneadData v0.7.4 (Bowtie2  v2.3.5.1, Trimmommatic v0.39)
 - SPAdes v.3.13.0
 - metaWRAP v1.2.1
+- INFERNAL v1.1.2
+- tRNAScan-SE v2.0
+- BBMap v.37.62
+- GUNC v1.0.1
+- CAT v5.2.1
 - CheckM  v1.1.2
 - Mash v.2.0
 - MUMmer v3.23
+- QUASTv5.0.2
 - dRep v2.3.2 
 - GTDB-Tkv1.0.2
+- ncbi-genome-downloadv0.2.12
 - EukRep v.0.6.7
 - EukCC v0.2
 
